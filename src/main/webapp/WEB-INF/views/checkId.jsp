@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>회원 가입 완료</title>
+<title>ID Check</title>
 </head>
 <body>
 	<%
@@ -18,13 +18,13 @@
 			history.go(-1);
 		</script>
 	<%
-		}else 
+		}else {
 	%>
-			<h2>회원 가입을 축하드립니다!</h2>			
-			<h2>${mname }님 반갑습니다!</h2>
-	
+		<script language="javascript">
+			alert("사용가능한 아이디 입니다.");
+			history.go(-1);
+		</script>
+	<% } %>	
 
-
-	
 </body>
 </html>

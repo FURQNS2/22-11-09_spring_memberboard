@@ -10,6 +10,16 @@
 	<h2>회원가입</h2>
 	<hr>
 		<table border="1" width="600" cellspacing="0" cellpadding="0">
+			<form action="checkId">
+				<tr height="30">
+					<th bgcolor="skyblue">아이디체크</th>
+					<td>
+						<input type="text" size="60" name="checkId">
+						<input type="submit" size="60" value="중복확인">		
+					</td>
+				</tr>
+			</form>
+			
 			<form action="joinok" method="post">
 				<tr height="30">
 					<th bgcolor="pink">회원아이디</th>
