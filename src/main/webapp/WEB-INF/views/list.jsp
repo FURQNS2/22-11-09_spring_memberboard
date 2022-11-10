@@ -8,8 +8,27 @@
 <title>글 목록</title>
 </head>
 <body>
-	<h2>글 목록</h2>
+	<table width="1000">
+		<tr>
+			<th align="left">글 목록</th>
+			<% 	
+				int idflag = Integer.parseInt((request.getAttribute("idflag").toString()));
+				if(idflag == 1){
+			%>
+				<td align="right">
+				${sid }님 로그인 중
+				<input type="button" value="로그아웃" onclick="javascript:window.location='logout'">
+				</td>
+			<% }else{ %>
+				<td align="right">	
+					<input type="button" value="로그인" onclick="javascript:window.location='login'">
+				</td>
+			<% } %>
+		</tr>
+	</table>
+	
 	<hr>
+	총게시글 개수: ${boardCount }
 	<table border="1" width="1000" cellspacing="0" cellpadding="0">
 		<tr bgcolor="pink">
 			<th>번호</th>
@@ -22,11 +41,11 @@
 		
 		<c:forEach items="${list }" var="fbdto">
 		<tr>
-			<td>${fbdto.fnum }</td>
-			<td>${fbdto.fid }</td>
+			<td align="center">${fbdto.fnum }</td>
+			<td align="center">${fbdto.fid }</td>
 			<td>${fbdto.fname }</td>
-			<td align="center">${fbdto.ftitle }</td>
-			<td>${fbdto.fhit }</td>
+			<td align="center"><a href="contentView?fnum=${fbdto.fnum }">${fbdto.ftitle }</a></td>
+			<td align="center">${fbdto.fhit }</td>
 			<td>${fbdto.fdate }</td>
 		</tr>
 		</c:forEach>

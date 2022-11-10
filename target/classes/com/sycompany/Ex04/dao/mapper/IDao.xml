@@ -34,5 +34,21 @@
 		SELECT * FROM freeboard ORDER BY fnum DESC
 	</select>
  	
+ 	<select id="contentViewDao" resultType="com.sycompany.Ex04.dto.FreeBoardDto">
+		SELECT * FROM freeboard WHERE fnum=#{param1}
+	</select>
+ 	
+ 	<delete id="deleteDao">
+ 		DELETE FROM freeboard WHERE fnum=#{param1}
+ 	</delete>
+ 	
+ 	<update id="modifyDao">
+ 		UPDATE freeboard SET ftitle=#{param2}, fcontent=#{param3} WHERE fnum=#{param1}
+ 	</update>
+ 	
+ 	<update id="uphitDao">
+ 		UPDATE freeboard SET fhit=fhit+1 WHERE fnum=#{param1}
+ 	</update>
+ 	
  	
  </mapper>

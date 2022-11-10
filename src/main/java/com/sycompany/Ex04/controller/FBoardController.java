@@ -1,5 +1,6 @@
 package com.sycompany.Ex04.controller;
 
+import java.net.http.HttpRequest;
 import java.util.ArrayList;
 
 import javax.servlet.http.HttpServletRequest;
@@ -171,7 +172,7 @@ public class FBoardController {
 	}
 	
 	@RequestMapping("/list")
-	public String list(Model model) {
+	public String list(HttpServletRequest request, Model model) {
 		
 		IDao dao = sqlSession.getMapper(IDao.class);
 		
@@ -179,14 +180,102 @@ public class FBoardController {
 		
 		dtos = dao.listDao();
 		
+		model.addAttribute("boardCount", dtos.size());	
 		model.addAttribute("list",dtos);
 		
+		
+		//화면에 저장 중인 로그인 값 가져오기
+		HttpSession session = request.getSession();
+		String sid = session.getAttribute("sessionId").toString();
+		
+		//idflag==1이면 로그인중, 0이면 비로그인
+		int idflag = 0;
+			if(sid != null) {
+				idflag = 1;   // 로그인 중
+			}else {
+				idflag = 0;    //비로그인
+			}
+		model.addAttribute("idflag",idflag); // 로그인 중인지 아닌지 판단된 값 jsp에 보내주기
+		
+		model.addAttribute("sid", sid); // 로그인하고 있는 아이디값 jsp로 보내주기
+
 		return "list";
 	}
 	
 	
+	@RequestMapping("/contentView")
+	public String contentView(HttpServletRequest request, Model model) {
+		
+		String fnum = request.getParameter("fnum");
+		
+		IDao dao = sqlSession.getMapper(IDao.class);
+		
+		dao.uphitDao(fnum);  //조회수
+		
+		FreeBoardDto fbdto = dao.contentViewDao(fnum); // 조회수를 입력받은 후 값을 송출
+ 		
+		
+		//현재세션에 로그인 되어있는 아이디 가져오기
+		HttpSession session = request.getSession();
+		String sid = session.getAttribute("sessionId").toString();
+		
+		String fid = fbdto.getFid(); // 보고 있는 글의 아이디
+		
+		//idflag==1이면 수정, 삭제 권한 설정
+		int idflag = 0;
+		
+			if((sid != null) && (sid.equals(fid))) {
+				idflag = 1;
+			}else {
+				idflag = 0;
+			}
+		model.addAttribute("idflag",idflag); 
+		
+		model.addAttribute("fbdto",  fbdto);
+		
+		return "contentView";
+	}
 	
+	@RequestMapping("/delete")
+	public String delete(HttpServletRequest request) {
+		
+		IDao dao = sqlSession.getMapper(IDao.class);
+		
+		String fnum = request.getParameter("fnum");
+		
+		dao.deleteDao(fnum);
+
+		return "redirect:list";
+	}
 	
+	@RequestMapping("/modifyView")
+	public String modifyView(HttpServletRequest request, Model model) {
+		
+		IDao dao = sqlSession.getMapper(IDao.class);
+		
+		String fnum = request.getParameter("fnum");
+		
+		FreeBoardDto fbdto = dao.contentViewDao(fnum);
+		
+		model.addAttribute("fbdto",  fbdto);
+		
+		return "modifyView";
+	}
+	
+	 
+	@RequestMapping("/modify")
+	public String modify(HttpServletRequest request) {
+		
+		IDao dao = sqlSession.getMapper(IDao.class);
+		
+		String fnum = request.getParameter("fnum");
+		String ftitle = request.getParameter("ftitle");
+		String fcontent = request.getParameter("fcontent");	
+		
+		dao.modifyDao(fnum, ftitle, fcontent);
+		
+		return "redirect:list";
+	}
 	
 	
 	

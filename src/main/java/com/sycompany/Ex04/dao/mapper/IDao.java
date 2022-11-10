@@ -29,4 +29,15 @@ public interface IDao {
 	// 목록(모든 글 불러오기)
 	public ArrayList<FreeBoardDto> listDao(); 
 	
+	// 클릭한 글 불러오기
+	public FreeBoardDto contentViewDao(String fnum);
+	
+	// 클릭한 글 삭제
+	public void deleteDao(String fnum);
+	
+	// 클릭한 글 수정
+	public void modifyDao(String fnum, String ftitle, String fcontent);
+	
+	// 조회수
+	public void uphitDao(String fnum);
 }

@@ -9,7 +9,7 @@
 <body>
 	<h2>자유게시판 글쓰기</h2>
 	<hr>
-	<table border="1" width="600" cellspacing="0" cellpadding="0">
+	<table border="1" width="400" cellspacing="0" cellpadding="0">
 		<form action="write">
 			<tr>
 				<th>아이디</th> 
@@ -30,7 +30,7 @@
 			<tr> 
 				<td colspan="2">
 					<input type="submit" value="글입력">
-					<input type="reset" value="취소">
+					<input type="reset" value="취소" onclick="javascript:window.history.back()">
 				</td>
 			</tr>
 		</form>	

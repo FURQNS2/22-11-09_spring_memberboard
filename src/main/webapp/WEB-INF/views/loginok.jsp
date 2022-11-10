@@ -32,9 +32,11 @@
 			<h2>로그인을 축하드립니다!</h2>	
 			<h2>${mid }	님 반갑습니다!</h2>	
 			<h2>회원이름: ${mname }</h2>	
-			<a href="writeForm">글쓰기</a>
-			<a href="list">글 목록</a>
-			<a href="logout">로그아웃</a>
+			
+			
+			<input type="button" value="글쓰기" onclick="javascript:window.location='writeForm'">
+			<input type="button" value="글목록" onclick="javascript:window.location='list'">
+			<input type="button" value="로그아웃" onclick="javascript:window.location='logout'">
 					
 	<% 
 	    } 

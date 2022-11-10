@@ -8,6 +8,6 @@
 </head>
 <body>
 	<h2>로그아웃 하셨습니다. 안녕히 가세요.</h2>
-	<a href="writeForm">글쓰기</a>
+	<input type="button" value="글목록" onclick="javascript:window.location='list'">
 </body>
 </html>
